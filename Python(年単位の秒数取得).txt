@@ -1,0 +1,48 @@
+# 1週間の秒数
+seconds_in_a_week = 7 * 24 * 60 * 60
+
+# 1月～12月までの秒数を格納するリスト
+seconds_in_months = []
+
+# 1年の秒数
+seconds_in_a_year = 0
+
+# 4年分の秒数を格納するリスト
+seconds_in_4_years = []
+
+# 年の範囲
+start_year = 2023
+end_year = 2026
+
+# 1月から12月までの秒数を計算し、リストに追加する
+for month in range(1, 13):
+    # 月の秒数を計算
+    seconds_in_month = seconds_in_a_week * 4 * (month // 2)  # うるう月は2週間分増える
+    if month % 2 == 0:  # うるう月ではない場合は1週間分増える
+        seconds_in_month += seconds_in_a_week
+    seconds_in_months.append(seconds_in_month)
+
+    # 1年の秒数に加算
+    seconds_in_a_year += seconds_in_month
+
+# 1年分の秒数を表示
+print("1年の秒数:", seconds_in_a_year)
+
+# 4年分の秒数を計算し、リストに追加する
+for year in range(start_year, end_year + 1):
+    if year % 4 == 0:  # うるう年の場合は1年分の秒数を加算
+        seconds_in_4_years.append(seconds_in_a_year)
+    else:  # うるう年ではない場合は1年分の秒数を加算（うるう月の秒数を除く）
+        seconds_in_4_years.append(seconds_in_a_year - seconds_in_months[1])
+
+# 4年分の秒数を表示
+print("4年分の秒数:", sum(seconds_in_4_years))
+
+# 2023年～2026年の1～12月までの秒数を表示
+year = start_year
+for year_index in range(end_year - start_year + 1):
+    current_year = year + year_index
+    for month in range(1, 13):
+        seconds_in_month = seconds_in_months[month - 1]
+        print(f"{current_year}年の{month}月の秒数:", seconds_in_month)
+
