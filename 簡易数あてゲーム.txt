@@ -1,0 +1,49 @@
+import random
+import math
+
+# 1から100までのランダムな数を生成
+secret_number = random.randint(1, 100)
+
+# 最初の入力として範囲外の数を設定
+previous_guess = -1
+
+# ゲームのループ
+while True:
+    # ユーザーの入力を受け取る
+    guess = int(input("1から100までの数を当ててください: "))
+
+    # 数字の比較と結果の表示
+    if guess == secret_number:
+        print("正解です！おめでとうございます！")
+        break
+    elif guess < secret_number:
+        print("もっと大きい数です")
+    else:
+        print("もっと小さい数です")
+
+    # 入力と秘密の数のズレの大きさを計算
+    difference = abs(guess - secret_number)
+
+    # 前回の入力との比較
+    if previous_guess != -1:
+        prev_difference = abs(previous_guess - secret_number)
+        if difference < prev_difference:
+            print("前回の入力に比べて近づいています")
+        elif difference > prev_difference:
+            print("前回の入力に比べて遠ざかっています")
+        else:
+            print("前回の入力と同じくらいのズレです")
+
+    # ヒントの表示
+    if difference >= 30:
+        print("かなり大きくズレています")
+    elif difference >= 20:
+        print("かなりズレています")
+    elif difference >= 10:
+        print("少しズレています")
+    else:
+        print("かなり近づいています")
+
+    # 前回の入力を更新
+    previous_guess = guess
+    
